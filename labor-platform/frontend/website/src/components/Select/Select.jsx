@@ -1,4 +1,5 @@
 import React from "react";
+import "./Select.css";
 
 function Select({
   options = [],
@@ -7,17 +8,9 @@ function Select({
 }) {
   return (
     <select
+      className="select"
       value={value}
       onChange={onChange}
-      style={{
-        width: "100%",
-        height: "48px",
-        padding: "0 16px",
-        border: "1px solid #dcdcdc",
-        borderRadius: "8px",
-        fontSize: "16px",
-        boxSizing: "border-box",
-      }}
     >
       {options.map((item, index) => (
         <option
