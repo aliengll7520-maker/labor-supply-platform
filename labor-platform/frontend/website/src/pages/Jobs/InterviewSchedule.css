@@ -1,0 +1,9 @@
+.interview-schedule{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.interview-title{
+  margin-bottom:20px;
+}
