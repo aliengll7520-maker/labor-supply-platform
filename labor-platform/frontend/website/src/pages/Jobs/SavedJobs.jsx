@@ -1,3 +1,4 @@
+
 import React from "react";
 import MainLayout from "../../layouts/MainLayout/MainLayout";
 import Card from "../../components/Card/Card";
@@ -23,16 +24,22 @@ function SavedJobs() {
             color="#1976d2"
           />
 
-          <p><strong>Công ty:</strong> ABC Electronics</p>
+          <p><strong>Nhà cung ứng:</strong> Nhà cung ứng A</p>
 
-          <p><strong>Lương:</strong> 12.000.000 VNĐ</p>
+          <p><strong>Mức lương:</strong> 12.000.000 VNĐ</p>
 
-          <p><strong>Địa điểm:</strong> Bắc Ninh</p>
+          <p><strong>Khu vực làm việc:</strong> Bắc Ninh</p>
+
+          <p><strong>Trạng thái:</strong> Đang tuyển</p>
 
           <div className="saved-jobs-actions">
+
             <Button text="XEM CHI TIẾT" />
+
             <div className="space"></div>
+
             <Button text="BỎ LƯU" />
+
           </div>
 
         </Card>
