@@ -1,4 +1,5 @@
 import React from "react";
+import "./Badge.css";
 
 function Badge({
   text = "",
@@ -6,15 +7,8 @@ function Badge({
 }) {
   return (
     <span
-      style={{
-        display: "inline-block",
-        padding: "6px 12px",
-        backgroundColor: color,
-        color: "#ffffff",
-        borderRadius: "20px",
-        fontSize: "12px",
-        fontWeight: "600",
-      }}
+      className="badge"
+      style={{ backgroundColor: color }}
     >
       {text}
     </span>
