@@ -1,0 +1,8 @@
+.filter-jobs{
+  display:flex;
+  flex-direction:column;
+}
+
+.space{
+  height:16px;
+}
