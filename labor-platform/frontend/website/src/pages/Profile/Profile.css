@@ -1,0 +1,9 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-title {
+  margin-bottom: 20px;
+}
