@@ -1,9 +1,0 @@
-.profile-home{
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-}
-
-.profile-home h1{
-  margin-bottom:20px;
-}
