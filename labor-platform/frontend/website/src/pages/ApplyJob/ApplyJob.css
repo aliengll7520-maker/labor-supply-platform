@@ -1,0 +1,13 @@
+.apply-job {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.apply-job-title {
+  margin-bottom: 20px;
+}
+
+.space {
+  height: 16px;
+}
