@@ -1,3 +1,4 @@
+
 import React from "react";
 import MainLayout from "../../layouts/MainLayout/MainLayout";
 import Card from "../../components/Card/Card";
@@ -23,14 +24,16 @@ function AppliedJobs() {
             color="#2e7d32"
           />
 
-          <p><strong>Công ty:</strong> ABC Electronics</p>
+          <p><strong>Nhà cung ứng:</strong> Nhà cung ứng A</p>
 
           <p><strong>Ngày ứng tuyển:</strong> 07/08/2026</p>
 
           <p><strong>Trạng thái:</strong> Đang chờ xử lý</p>
 
           <div className="applied-jobs-actions">
+
             <Button text="XEM CHI TIẾT" />
+
           </div>
 
         </Card>
