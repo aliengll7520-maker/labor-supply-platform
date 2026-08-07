@@ -1,0 +1,12 @@
+.main-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background: #f4f6f9;
+  box-sizing: border-box;
+}
