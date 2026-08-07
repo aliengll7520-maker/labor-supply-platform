@@ -1,0 +1,8 @@
+.job-detail{
+  display:flex;
+  flex-direction:column;
+}
+
+.job-detail h1{
+  margin-bottom:20px;
+}
