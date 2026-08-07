@@ -1,4 +1,7 @@
 import React from "react";
+import Card from "../components/Card/Card";
+import Input from "../components/Input/Input";
+import Button from "../components/Button/Button";
 
 function Login() {
   return (
@@ -9,55 +12,28 @@ function Login() {
         alignItems: "center",
         height: "100vh",
         background: "#f5f5f5",
+        padding: "20px",
       }}
     >
-      <div
-        style={{
-          width: "360px",
-          background: "#ffffff",
-          padding: "30px",
-          borderRadius: "12px",
-          boxShadow: "0 2px 12px rgba(0,0,0,0.1)",
-        }}
-      >
-        <h2 style={{ textAlign: "center" }}>
-          Labor Supply Platform
-        </h2>
+      <div style={{ width: "360px" }}>
+        <Card>
+          <h2 style={{ textAlign: "center", marginBottom: "24px" }}>
+            Labor Supply Platform
+          </h2>
 
-        <input
-          type="text"
-          placeholder="Tên đăng nhập"
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginTop: "20px",
-            marginBottom: "15px",
-          }}
-        />
+          <Input placeholder="Tên đăng nhập" />
 
-        <input
-          type="password"
-          placeholder="Mật khẩu"
-          style={{
-            width: "100%",
-            padding: "12px",
-            marginBottom: "20px",
-          }}
-        />
+          <div style={{ height: "16px" }} />
 
-        <button
-          style={{
-            width: "100%",
-            padding: "12px",
-            background: "#1976d2",
-            color: "#fff",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-          }}
-        >
-          Đăng nhập
-        </button>
+          <Input
+            type="password"
+            placeholder="Mật khẩu"
+          />
+
+          <div style={{ height: "24px" }} />
+
+          <Button text="Đăng nhập" />
+        </Card>
       </div>
     </div>
   );
