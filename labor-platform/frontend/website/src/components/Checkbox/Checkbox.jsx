@@ -1,4 +1,5 @@
 import React from "react";
+import "./Checkbox.css";
 
 function Checkbox({
   label = "",
@@ -6,20 +7,12 @@ function Checkbox({
   onChange,
 }) {
   return (
-    <label
-      style={{
-        display: "flex",
-        alignItems: "center",
-        cursor: "pointer",
-        gap: "8px",
-      }}
-    >
+    <label className="checkbox">
       <input
         type="checkbox"
         checked={checked}
         onChange={onChange}
       />
-
       <span>{label}</span>
     </label>
   );
