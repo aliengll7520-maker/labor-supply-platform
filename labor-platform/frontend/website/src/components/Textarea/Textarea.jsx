@@ -1,4 +1,5 @@
 import React from "react";
+import "./Textarea.css";
 
 function Textarea({
   placeholder = "",
@@ -8,19 +9,11 @@ function Textarea({
 }) {
   return (
     <textarea
+      className="textarea"
       placeholder={placeholder}
       value={value}
       onChange={onChange}
       rows={rows}
-      style={{
-        width: "100%",
-        padding: "12px 16px",
-        border: "1px solid #dcdcdc",
-        borderRadius: "8px",
-        fontSize: "16px",
-        resize: "vertical",
-        boxSizing: "border-box",
-      }}
     />
   );
 }
