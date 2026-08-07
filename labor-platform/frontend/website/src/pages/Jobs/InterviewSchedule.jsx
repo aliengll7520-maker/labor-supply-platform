@@ -23,13 +23,15 @@ function InterviewSchedule() {
             color="#1976d2"
           />
 
-          <p><strong>Doanh nghiệp:</strong> ABC Electronics</p>
+          <p><strong>Nhà cung ứng:</strong> Nhà cung ứng A</p>
 
-          <p><strong>Ngày:</strong> 15/08/2026</p>
+          <p><strong>Ngày phỏng vấn:</strong> 15/08/2026</p>
 
-          <p><strong>Giờ:</strong> 08:30</p>
+          <p><strong>Giờ phỏng vấn:</strong> 08:30</p>
 
-          <p><strong>Địa điểm:</strong> KCN Quế Võ - Bắc Ninh</p>
+          <p><strong>Địa điểm:</strong> Văn phòng Nhà cung ứng A</p>
+
+          <p><strong>Trạng thái:</strong> Chờ xác nhận</p>
 
           <Button text="XÁC NHẬN THAM GIA" />
 
