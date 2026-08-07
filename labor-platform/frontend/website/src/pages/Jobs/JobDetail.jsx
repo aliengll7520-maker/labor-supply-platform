@@ -8,7 +8,6 @@ import "./JobDetail.css";
 function JobDetail() {
   return (
     <MainLayout>
-
       <div className="job-detail">
 
         <h1>Chi tiết việc làm</h1>
@@ -22,24 +21,26 @@ function JobDetail() {
             color="#2e7d32"
           />
 
-          <p><strong>Công ty:</strong> ABC Electronics</p>
+          <p><strong>Nhà cung ứng:</strong> Nhà cung ứng A</p>
 
-          <p><strong>Lương:</strong> 12.000.000 VNĐ</p>
+          <p><strong>Mức lương:</strong> 12.000.000 VNĐ</p>
 
-          <p><strong>Địa điểm:</strong> Bắc Ninh</p>
+          <p><strong>Khu vực làm việc:</strong> Bắc Ninh</p>
 
-          <p><strong>Ca làm:</strong> Hành chính</p>
+          <p><strong>Hình thức làm việc:</strong> Toàn thời gian</p>
 
-          <p><strong>Số lượng:</strong> 100</p>
+          <p><strong>Số lượng tuyển:</strong> 100 người</p>
 
-          <p><strong>Mô tả:</strong> Lắp ráp linh kiện điện tử.</p>
+          <p>
+            <strong>Mô tả công việc:</strong> Tham gia sản xuất và lắp ráp linh
+            kiện điện tử theo hướng dẫn của nhà cung ứng.
+          </p>
 
           <Button text="ỨNG TUYỂN NGAY" />
 
         </Card>
 
       </div>
-
     </MainLayout>
   );
 }
