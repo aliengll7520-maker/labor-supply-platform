@@ -23,13 +23,15 @@ function ApplicationResult() {
             color="#2e7d32"
           />
 
-          <p><strong>Doanh nghiệp:</strong> ABC Electronics</p>
+          <p><strong>Nhà cung ứng:</strong> Nhà cung ứng A</p>
 
           <p><strong>Ngày thông báo:</strong> 18/08/2026</p>
 
-          <p><strong>Kết quả:</strong> Chúc mừng! Bạn đã được tiếp nhận.</p>
+          <p><strong>Kết quả:</strong> Hồ sơ đã được nhà cung ứng tiếp nhận.</p>
 
-          <Button text="XEM HƯỚNG DẪN NHẬN VIỆC" />
+          <p><strong>Trạng thái:</strong> Chờ hướng dẫn nhận việc.</p>
+
+          <Button text="XEM CHI TIẾT" />
 
         </Card>
 
