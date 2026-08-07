@@ -1,0 +1,9 @@
+.jobs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.jobs-title {
+  margin-bottom: 20px;
+}
