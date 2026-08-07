@@ -1,0 +1,9 @@
+.application-result {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.application-result-title {
+  margin-bottom: 20px;
+}
