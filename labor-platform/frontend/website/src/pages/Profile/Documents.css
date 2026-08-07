@@ -1,0 +1,9 @@
+.documents{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.documents h1{
+  margin-bottom:20px;
+}
