@@ -11,27 +11,69 @@ function ApplicationResult() {
       <div className="application-result">
 
         <h1 className="application-result-title">
-          Kết quả ứng tuyển
+          Hồ sơ kết nối
         </h1>
 
         <Card>
 
-          <h2>Công nhân điện tử</h2>
+          <div className="application-result-success">
+            <h2>Hồ sơ kết nối đã được tạo</h2>
 
-          <Badge
-            text="Đã trúng tuyển"
-            color="#2e7d32"
-          />
+            <p>
+              Thông tin của bạn đã được ghi nhận trên hệ thống.
+            </p>
+          </div>
 
-          <p><strong>Nhà cung ứng:</strong> Nhà cung ứng A</p>
+          <div className="application-result-info">
 
-          <p><strong>Ngày thông báo:</strong> 18/08/2026</p>
+            <p>
+              <strong>Công việc:</strong>{" "}
+              Công nhân điện tử
+            </p>
 
-          <p><strong>Kết quả:</strong> Hồ sơ đã được nhà cung ứng tiếp nhận.</p>
+            <p>
+              <strong>Nhà cung ứng:</strong>{" "}
+              Nhà cung ứng A
+            </p>
 
-          <p><strong>Trạng thái:</strong> Chờ hướng dẫn nhận việc.</p>
+            <p>
+              <strong>Ngày tạo:</strong>{" "}
+              07/08/2026
+            </p>
 
-          <Button text="XEM CHI TIẾT" />
+            <p>
+              <strong>Trạng thái:</strong>
+            </p>
+
+            <Badge
+              text="Mới tạo"
+              color="#2e7d32"
+            />
+
+          </div>
+
+          <div
+            style={{
+              marginTop: "24px",
+              padding: "16px",
+              border: "1px solid #ddd",
+              borderRadius: "8px",
+            }}
+          >
+            <p>
+              Hồ sơ kết nối của bạn đã được tạo.
+              Nhà cung ứng có thể tiếp nhận và cập nhật
+              quá trình xử lý hồ sơ.
+            </p>
+          </div>
+
+          <div
+            style={{
+              marginTop: "20px",
+            }}
+          >
+            <Button text="XEM HỒ SƠ KẾT NỐI" />
+          </div>
 
         </Card>
 
@@ -40,4 +82,4 @@ function ApplicationResult() {
   );
 }
 
-export default ApplicationResult;
+export default ApplicationResult; 
