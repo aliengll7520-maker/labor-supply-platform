@@ -1,111 +1,187 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../components/Card/Card";
 import Input from "../components/Input/Input";
 import Button from "../components/Button/Button";
-import Checkbox from "../components/Checkbox/Checkbox";
+import "./Register.css";
 
 function Register() {
   const [hoTen, setHoTen] = useState("");
   const [soDienThoai, setSoDienThoai] = useState("");
   const [queQuan, setQueQuan] = useState("");
-  const [dongY, setDongY] = useState(false);
+
+  const [tinTuyenDungId, setTinTuyenDungId] = useState("");
+  const [nhaCungUngId, setNhaCungUngId] = useState("");
+
+  useEffect(() => {
+    /*
+     * Lấy thông tin kết nối từ URL.
+     *
+     * Ví dụ:
+     *
+     * #/register?tin_tuyen_dung_id=1&nha_cung_ung_id=1
+     *
+     * Hai ID này KHÔNG phải dữ liệu cá nhân của
+     * Người lao động.
+     *
+     * Chúng dùng để xác định:
+     *
+     * Người lao động đang muốn kết nối với
+     * Tin tuyển dụng nào và Nhà cung ứng nào.
+     */
+
+    const hash = window.location.hash;
+
+    const queryIndex = hash.indexOf("?");
+
+    if (queryIndex === -1) {
+      return;
+    }
+
+    const queryString = hash.substring(queryIndex + 1);
+    const params = new URLSearchParams(queryString);
+
+    setTinTuyenDungId(
+      params.get("tin_tuyen_dung_id") || ""
+    );
+
+    setNhaCungUngId(
+      params.get("nha_cung_ung_id") || ""
+    );
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!hoTen.trim() || !soDienThoai.trim() || !queQuan.trim()) {
-      return;
-    }
+    /*
+     * Chỉ chấp nhận đúng 3 trường dữ liệu
+     * của Người lao động:
+     *
+     * 1. Họ và tên
+     * 2. Số điện thoại
+     * 3. Quê quán
+     */
 
-    if (!dongY) {
+    if (
+      !hoTen.trim() ||
+      !soDienThoai.trim() ||
+      !queQuan.trim()
+    ) {
       return;
     }
 
     /*
-     * Chưa gọi API ở giai đoạn này.
+     * Kiểm tra ngữ cảnh kết nối.
      *
-     * Backend sau này sẽ:
-     * 1. Tạo Người lao động.
-     * 2. Tạo Hồ sơ kết nối.
-     * 3. Sau khi thành công mới cho phép mở
-     *    số điện thoại Nhà cung ứng.
+     * Không cho tạo Hồ sơ kết nối nếu không biết
+     * Người lao động đang kết nối với tin nào.
      */
+
+    if (!tinTuyenDungId || !nhaCungUngId) {
+      return;
+    }
+
+    /*
+     * Backend sau này sẽ:
+     *
+     * 1. Tạo hoặc xác định Người lao động.
+     * 2. Tạo 00_HoSoKetNoi.
+     * 3. Gắn:
+     *
+     *    nguoi_lao_dong_id
+     *    nha_cung_ung_id
+     *    tin_tuyen_dung_id
+     *
+     * 4. Ghi nhận 04_QuaTrinhKetNoi.
+     * 5. Ghi nhật ký hệ thống.
+     * 6. Cho phép mở số điện thoại Nhà cung ứng.
+     *
+     * Hiện tại chưa gọi API vì Backend chưa xây.
+     */
+
+    console.log({
+      hoTen,
+      soDienThoai,
+      queQuan,
+      tinTuyenDungId,
+      nhaCungUngId,
+    });
+  };
+
+  const handleBackToJobs = () => {
+    window.location.hash = "#/jobs";
   };
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "#f4f6f9",
-        padding: "20px",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "420px",
-        }}
-      >
-        <Card>
-          <form onSubmit={handleSubmit}>
-            <div
-              style={{
-                textAlign: "center",
-                marginBottom: "30px",
-              }}
-            >
-              <h2>Đăng ký</h2>
+    <div className="register-page">
 
-              <p
-                style={{
-                  color: "#666",
-                  fontSize: "14px",
-                }}
-              >
-                Đăng ký để tiếp tục kết nối với Nhà cung ứng
-              </p>
-            </div>
+      <Card>
 
-            <div style={{ marginBottom: "16px" }}>
-              <Input
-                placeholder="Họ và tên"
-                value={hoTen}
-                onChange={(event) => setHoTen(event.target.value)}
-              />
-            </div>
+        <div className="register-header">
 
-            <div style={{ marginBottom: "16px" }}>
-              <Input
-                type="tel"
-                placeholder="Số điện thoại"
-                value={soDienThoai}
-                onChange={(event) => setSoDienThoai(event.target.value)}
-              />
-            </div>
+          <h1>
+            Đăng ký để xem số điện thoại
+          </h1>
 
-            <div style={{ marginBottom: "16px" }}>
-              <Input
-                placeholder="Quê quán"
-                value={queQuan}
-                onChange={(event) => setQueQuan(event.target.value)}
-              />
-            </div>
+          <p>
+            Nhập 3 thông tin cơ bản để tạo
+            Hồ sơ kết nối với Nhà cung ứng.
+          </p>
 
-            <div style={{ marginBottom: "24px" }}>
-              <Checkbox
-                label="Tôi đồng ý với điều khoản sử dụng"
-                checked={dongY}
-                onChange={(event) => setDongY(event.target.checked)}
-              />
-            </div>
+        </div>
 
-            <Button text="ĐĂNG KÝ" type="submit" />
-          </form>
-        </Card>
-      </div>
+        <form onSubmit={handleSubmit}>
+
+          <Input
+            placeholder="Họ và tên"
+            value={hoTen}
+            onChange={(event) =>
+              setHoTen(event.target.value)
+            }
+          />
+
+          <div className="space"></div>
+
+          <Input
+            type="tel"
+            placeholder="Số điện thoại"
+            value={soDienThoai}
+            onChange={(event) =>
+              setSoDienThoai(event.target.value)
+            }
+          />
+
+          <div className="space"></div>
+
+          <Input
+            placeholder="Quê quán"
+            value={queQuan}
+            onChange={(event) =>
+              setQueQuan(event.target.value)
+            }
+          />
+
+          <div className="space"></div>
+
+          <Button
+            text="TẠO HỒ SƠ KẾT NỐI"
+            type="submit"
+          />
+
+        </form>
+
+        <div
+          style={{
+            marginTop: "20px",
+          }}
+        >
+          <Button
+            text="QUAY LẠI XEM TIN"
+            onClick={handleBackToJobs}
+          />
+        </div>
+
+      </Card>
+
     </div>
   );
 }
