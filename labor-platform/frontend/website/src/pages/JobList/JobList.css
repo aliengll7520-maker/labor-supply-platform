@@ -1,9 +1,0 @@
-.job-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.job-list-title {
-  margin-bottom: 20px;
-}
