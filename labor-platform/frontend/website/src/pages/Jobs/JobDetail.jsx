@@ -10,17 +10,6 @@ function JobDetail() {
   const [nhaCungUngId, setNhaCungUngId] = useState("");
 
   useEffect(() => {
-    /*
-     * Đọc ID từ URL.
-     *
-     * Ví dụ:
-     *
-     * #/job-detail?tin_tuyen_dung_id=2
-     *
-     * Khi Backend hoạt động, nha_cung_ung_id sẽ được
-     * lấy từ chính dữ liệu Tin tuyển dụng.
-     */
-
     const hash = window.location.hash;
     const queryIndex = hash.indexOf("?");
 
@@ -28,48 +17,27 @@ function JobDetail() {
       return;
     }
 
-    const queryString = hash.substring(queryIndex + 1);
-    const params = new URLSearchParams(queryString);
+    const params = new URLSearchParams(
+      hash.substring(queryIndex + 1)
+    );
 
     setTinTuyenDungId(
       params.get("tin_tuyen_dung_id") || ""
     );
 
     /*
-     * Hiện tại dữ liệu mẫu chưa lấy từ Backend.
-     *
-     * Khi Backend hoạt động:
-     *
-     * tin_tuyen_dung_id
-     *        ↓
-     * 03_TinTuyenDung
-     *        ↓
-     * nha_cung_ung_id
-     *
-     * Không được cho người dùng tự nhập ID Nhà cung ứng.
+     * Khi Backend hoạt động, ID Nhà cung ứng
+     * sẽ được lấy từ Tin tuyển dụng.
      */
-
     setNhaCungUngId(
       params.get("nha_cung_ung_id") || "1"
     );
   }, []);
 
-  const handleViewSupplierPhone = () => {
-    /*
-     * Không có Tin tuyển dụng ID thì không tạo
-     * Hồ sơ kết nối.
-     */
-
+  const handleRegisterInterviewProfile = () => {
     if (!tinTuyenDungId || !nhaCungUngId) {
       return;
     }
-
-    /*
-     * Người lao động không cần đăng nhập.
-     *
-     * Chỉ khi yêu cầu xem số điện thoại Nhà cung ứng
-     * mới đi tới bước đăng ký 3 trường.
-     */
 
     window.location.hash =
       `#/register?tin_tuyen_dung_id=${encodeURIComponent(
@@ -132,21 +100,21 @@ function JobDetail() {
 
           <div
             style={{
-              marginTop: "24px",
-              padding: "16px",
+              marginTop: "28px",
+              padding: "20px",
               border: "1px solid #ddd",
               borderRadius: "8px",
             }}
           >
 
-            <p>
-              <strong>
-                Số điện thoại Nhà cung ứng
-              </strong>
-            </p>
+            <h3>
+              Đăng ký Hồ sơ phỏng vấn
+            </h3>
 
             <p>
-              🔒 Số điện thoại đang được bảo vệ
+              Nếu bạn quan tâm đến công việc này,
+              hãy đăng ký Hồ sơ phỏng vấn cho
+              vị trí này.
             </p>
 
             <p
@@ -155,14 +123,24 @@ function JobDetail() {
                 color: "#666",
               }}
             >
-              Đăng ký 3 thông tin cơ bản để tạo
-              Hồ sơ kết nối và xem số điện thoại
-              Nhà cung ứng.
+              Bạn chỉ cần cung cấp 3 thông tin cơ bản:
+              Họ và tên, Số điện thoại và Quê quán.
+            </p>
+
+            <p
+              style={{
+                fontSize: "14px",
+                color: "#666",
+              }}
+            >
+              Sau khi đăng ký thành công, thông tin
+              liên hệ của Nhà cung ứng sẽ được hiển thị
+              để bạn chủ động liên hệ.
             </p>
 
             <Button
-              text="XEM SỐ ĐIỆN THOẠI"
-              onClick={handleViewSupplierPhone}
+              text="ĐĂNG KÝ HỒ SƠ PHỎNG VẤN"
+              onClick={handleRegisterInterviewProfile}
             />
 
           </div>
