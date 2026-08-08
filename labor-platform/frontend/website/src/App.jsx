@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -17,96 +17,142 @@ import Profile from "./pages/Profile/Profile";
 import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
-  const [currentRoute, setCurrentRoute] = useState("login");
+  const getRoute = () => {
+    const hash = window.location.hash;
 
-  const navigate = (route) => {
-    setCurrentRoute(route);
+    if (!hash || hash === "#/" || hash === "#/jobs") {
+      return "jobs";
+    }
+
+    return hash.replace("#/", "");
   };
 
+  const [currentRoute, setCurrentRoute] = useState(getRoute());
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCurrentRoute(getRoute());
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => {
+      window.removeEventListener(
+        "hashchange",
+        handleHashChange
+      );
+    };
+  }, []);
+
   /*
-   * ROUTE CORE CỦA NỀN TẢNG
+   * =====================================================
+   * NGUYÊN TẮC CỬA VÀO
+   * =====================================================
    *
-   * Chỉ giữ 3 tầng:
+   * Người lao động KHÔNG bắt buộc đăng nhập để:
    *
-   * 1. QUẢN TRỊ
-   * 2. NHÀ CUNG ỨNG
-   * 3. NGƯỜI LAO ĐỘNG
+   * - Xem tin tuyển dụng.
+   * - Tìm việc.
+   * - Lọc việc.
+   * - Xem chi tiết tin.
    *
-   * Không có tầng Doanh nghiệp tuyển dụng trực tiếp.
+   * Đăng nhập chỉ là chức năng tùy chọn.
    *
-   * Backend và hệ thống xác thực thật sẽ được xây sau.
+   * Khi người lao động muốn xem số điện thoại
+   * Nhà cung ứng:
+   *
+   * Tin tuyển dụng
+   *       ↓
+   * Yêu cầu xem số điện thoại
+   *       ↓
+   * Đăng ký 3 trường
+   *       ↓
+   * Tạo Hồ sơ kết nối
+   *       ↓
+   * Mở số điện thoại Nhà cung ứng
+   *
+   * =====================================================
    */
 
   switch (currentRoute) {
     /*
-     * ==================================================
-     * CỬA VÀO
-     * ==================================================
+     * ================================================
+     * CỬA VÀO CÔNG KHAI
+     * ================================================
+     */
+
+    case "jobs":
+      return <Jobs />;
+
+    case "search":
+      return <SearchJobs />;
+
+    case "filter":
+      return <FilterJobs />;
+
+    case "job-detail":
+      return <JobDetail />;
+
+    /*
+     * ================================================
+     * ĐĂNG NHẬP / ĐĂNG KÝ
+     *
+     * Chỉ là chức năng tùy chọn.
+     * Không phải cửa vào bắt buộc.
+     * ================================================
      */
 
     case "login":
-      return (
-        <Login
-          onRegister={() => navigate("register")}
-        />
-      );
+      return <Login />;
 
     case "register":
       return <Register />;
 
     /*
-     * ==================================================
+     * ================================================
      * NGƯỜI LAO ĐỘNG
-     * ==================================================
+     * ================================================
      */
 
-    case "worker-jobs":
-      return <Jobs />;
-
-    case "worker-search":
-      return <SearchJobs />;
-
-    case "worker-filter":
-      return <FilterJobs />;
-
-    case "worker-job-detail":
-      return <JobDetail />;
-
-    case "worker-saved-jobs":
+    case "saved-jobs":
       return <SavedJobs />;
 
-    case "worker-connections":
+    case "connections":
       return <AppliedJobs />;
 
-    case "worker-connection-result":
+    case "connection-result":
       return <ApplicationResult />;
 
-    case "worker-interview":
+    case "interview":
       return <InterviewSchedule />;
 
-    case "worker-profile":
+    case "profile":
       return <Profile />;
 
     /*
-     * ==================================================
+     * ================================================
      * DASHBOARD
      *
-     * Tạm giữ làm màn hình chờ.
-     * Chưa gắn nghiệp vụ thật cho đến khi Backend hoàn thành.
-     * ==================================================
+     * Tạm giữ.
+     * Chưa có dữ liệu Backend thật.
+     * ================================================
      */
 
     case "dashboard":
       return <Dashboard />;
 
     /*
-     * ==================================================
-     * ROUTE MẶC ĐỊNH
-     * ==================================================
+     * ================================================
+     * MẶC ĐỊNH
+     *
+     * Không đăng nhập.
+     * Luôn đưa khách về danh sách tin công khai.
+     * ================================================
      */
 
     default:
-      return <Login />;
+      window.location.hash = "#/jobs";
+      return <Jobs />;
   }
 }
 
