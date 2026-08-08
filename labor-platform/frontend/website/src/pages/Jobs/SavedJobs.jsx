@@ -6,20 +6,29 @@ import Button from "../../components/Button/Button";
 import "./SavedJobs.css";
 
 function SavedJobs() {
-  const handleViewJob = () => {
+  const handleViewJob = (jobId) => {
     /*
-     * Chuyển đến chi tiết tin tuyển dụng.
+     * Xem lại tin tuyển dụng.
      *
-     * Việc lưu tin KHÔNG tạo Hồ sơ kết nối.
+     * Lưu tin không tạo Hồ sơ kết nối.
+     * Người lao động vẫn có thể xem tin mà
+     * không cần đăng nhập.
      */
+    window.location.hash = "#/job-detail";
   };
 
-  const handleRemoveSavedJob = () => {
+  const handleRemoveSavedJob = (jobId) => {
     /*
-     * Bỏ tin khỏi danh sách đã lưu.
+     * Sau này Backend sẽ xóa tin khỏi danh sách
+     * đã lưu của Người lao động.
      *
-     * Không ảnh hưởng đến Hồ sơ kết nối.
+     * Việc bỏ lưu không ảnh hưởng đến:
+     * - Người lao động
+     * - Nhà cung ứng
+     * - Hồ sơ kết nối
+     * - Quá trình kết nối
      */
+    console.log("Bỏ lưu tin:", jobId);
   };
 
   return (
@@ -32,11 +41,13 @@ function SavedJobs() {
 
         <Card>
 
-          <h2>Công nhân điện tử</h2>
+          <h2>
+            Công nhân điện tử
+          </h2>
 
           <Badge
-            text="Đã lưu"
-            color="#1976d2"
+            text="Đang tuyển"
+            color="#2e7d32"
           />
 
           <p>
@@ -50,27 +61,26 @@ function SavedJobs() {
           </p>
 
           <p>
-            <strong>Khu vực:</strong>{" "}
+            <strong>Địa điểm:</strong>{" "}
             Bắc Ninh
           </p>
 
-          <p>
-            <strong>Trạng thái:</strong>{" "}
-            Đang tuyển
-          </p>
-
-          <div className="saved-jobs-actions">
+          <div
+            style={{
+              marginTop: "20px",
+            }}
+          >
 
             <Button
               text="XEM CHI TIẾT"
-              onClick={handleViewJob}
+              onClick={() => handleViewJob(1)}
             />
 
             <div className="space"></div>
 
             <Button
               text="BỎ LƯU"
-              onClick={handleRemoveSavedJob}
+              onClick={() => handleRemoveSavedJob(1)}
             />
 
           </div>
