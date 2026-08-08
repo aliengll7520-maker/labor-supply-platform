@@ -18,13 +18,11 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 
 function App() {
   const getRoute = () => {
-    const hash = window.location.hash;
+    const hash = window.location.hash || "#/jobs";
 
-    if (!hash || hash === "#/" || hash === "#/jobs") {
-      return "jobs";
-    }
+    const routePart = hash.split("?")[0];
 
-    return hash.replace("#/", "");
+    return routePart.replace(/^#\/?/, "") || "jobs";
   };
 
   const [currentRoute, setCurrentRoute] = useState(getRoute());
@@ -46,41 +44,30 @@ function App() {
 
   /*
    * =====================================================
-   * NGUYÊN TẮC CỬA VÀO
+   * CỬA VÀO CÔNG KHAI
    * =====================================================
    *
-   * Người lao động KHÔNG bắt buộc đăng nhập để:
+   * Người lao động không cần đăng nhập để:
    *
    * - Xem tin tuyển dụng.
-   * - Tìm việc.
-   * - Lọc việc.
+   * - Tìm kiếm việc làm.
+   * - Lọc việc làm.
    * - Xem chi tiết tin.
    *
    * Đăng nhập chỉ là chức năng tùy chọn.
-   *
-   * Khi người lao động muốn xem số điện thoại
-   * Nhà cung ứng:
-   *
-   * Tin tuyển dụng
-   *       ↓
-   * Yêu cầu xem số điện thoại
-   *       ↓
-   * Đăng ký 3 trường
-   *       ↓
-   * Tạo Hồ sơ kết nối
-   *       ↓
-   * Mở số điện thoại Nhà cung ứng
    *
    * =====================================================
    */
 
   switch (currentRoute) {
+
     /*
-     * ================================================
-     * CỬA VÀO CÔNG KHAI
-     * ================================================
+     * -----------------------------------------------
+     * TIN TUYỂN DỤNG CÔNG KHAI
+     * -----------------------------------------------
      */
 
+    case "":
     case "jobs":
       return <Jobs />;
 
@@ -94,12 +81,11 @@ function App() {
       return <JobDetail />;
 
     /*
-     * ================================================
+     * -----------------------------------------------
      * ĐĂNG NHẬP / ĐĂNG KÝ
      *
-     * Chỉ là chức năng tùy chọn.
      * Không phải cửa vào bắt buộc.
-     * ================================================
+     * -----------------------------------------------
      */
 
     case "login":
@@ -109,9 +95,9 @@ function App() {
       return <Register />;
 
     /*
-     * ================================================
+     * -----------------------------------------------
      * NGƯỜI LAO ĐỘNG
-     * ================================================
+     * -----------------------------------------------
      */
 
     case "saved-jobs":
@@ -130,24 +116,24 @@ function App() {
       return <Profile />;
 
     /*
-     * ================================================
+     * -----------------------------------------------
      * DASHBOARD
      *
-     * Tạm giữ.
-     * Chưa có dữ liệu Backend thật.
-     * ================================================
+     * Tạm giữ cho giai đoạn giao diện.
+     * Chưa lấy dữ liệu thật.
+     * -----------------------------------------------
      */
 
     case "dashboard":
       return <Dashboard />;
 
     /*
-     * ================================================
-     * MẶC ĐỊNH
+     * -----------------------------------------------
+     * ROUTE KHÔNG HỢP LỆ
      *
-     * Không đăng nhập.
-     * Luôn đưa khách về danh sách tin công khai.
-     * ================================================
+     * Luôn đưa khách về tin tuyển dụng công khai.
+     * Không bắt đăng nhập.
+     * -----------------------------------------------
      */
 
     default:
