@@ -6,6 +6,16 @@ import Button from "../../components/Button/Button";
 import "./AppliedJobs.css";
 
 function AppliedJobs() {
+  const handleViewConnection = (connectionId) => {
+    /*
+     * Sau này Backend sẽ lấy Hồ sơ kết nối
+     * từ 00_HoSoKetNoi.
+     *
+     * connectionId là ID của Hồ sơ kết nối.
+     */
+    console.log("Xem Hồ sơ kết nối:", connectionId);
+  };
+
   return (
     <MainLayout>
       <div className="applied-jobs">
@@ -16,31 +26,57 @@ function AppliedJobs() {
 
         <Card>
 
-          <h2>Công nhân điện tử</h2>
+          <h2>
+            Công nhân điện tử
+          </h2>
 
           <p>
-            <strong>Nhà cung ứng:</strong> Nhà cung ứng A
+            <strong>Nhà cung ứng:</strong>{" "}
+            Nhà cung ứng A
           </p>
 
           <p>
-            <strong>Ngày tạo hồ sơ:</strong> 07/08/2026
+            <strong>Ngày tạo:</strong>{" "}
+            08/08/2026
           </p>
 
-          <div style={{ marginBottom: "16px" }}>
-            <Badge
-              text="Mới tạo"
-              color="#2e7d32"
-            />
+          <p>
+            <strong>Trạng thái:</strong>
+          </p>
+
+          <Badge
+            text="Đã tạo Hồ sơ kết nối"
+            color="#2e7d32"
+          />
+
+          <div
+            style={{
+              marginTop: "16px",
+              padding: "16px",
+              border: "1px solid #ddd",
+              borderRadius: "8px",
+            }}
+          >
+
+            <p>
+              Hồ sơ này ghi nhận việc bạn đã tạo
+              kết nối với Nhà cung ứng thông qua
+              tin tuyển dụng.
+            </p>
+
+            <p>
+              Các bước tiếp theo sẽ được cập nhật
+              trong Quá trình kết nối.
+            </p>
+
           </div>
 
-          <p>
-            Hồ sơ kết nối được tạo khi bạn đăng ký
-            thông tin để xem số điện thoại Nhà cung ứng.
-          </p>
+          <div style={{ marginTop: "20px" }}>
 
-          <div className="applied-jobs-actions">
-
-            <Button text="XEM HỒ SƠ KẾT NỐI" />
+            <Button
+              text="XEM HỒ SƠ KẾT NỐI"
+              onClick={() => handleViewConnection(1)}
+            />
 
           </div>
 
