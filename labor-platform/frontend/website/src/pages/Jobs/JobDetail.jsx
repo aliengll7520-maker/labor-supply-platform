@@ -6,30 +6,54 @@ import Button from "../../components/Button/Button";
 import "./JobDetail.css";
 
 function JobDetail() {
+  /*
+   * ID tạm thời của tin tuyển dụng và Nhà cung ứng.
+   *
+   * Khi Backend hoạt động, hai giá trị này sẽ được
+   * lấy trực tiếp từ dữ liệu Tin tuyển dụng.
+   */
+  const tinTuyenDungId = 1;
+  const nhaCungUngId = 1;
+
   const handleViewSupplierPhone = () => {
     /*
-     * Chưa gọi API ở giai đoạn này.
+     * Người lao động KHÔNG cần đăng nhập để thực hiện
+     * hành động này.
      *
-     * Luồng chính thức:
+     * Hệ thống đưa người lao động tới màn hình đăng ký
+     * 3 trường:
      *
-     * 1. Người lao động xem tin công khai.
-     * 2. Số điện thoại Nhà cung ứng bị ẩn.
-     * 3. Người lao động chọn xem số điện thoại.
-     * 4. Nếu chưa có Hồ sơ kết nối -> đăng ký 3 trường.
-     * 5. Backend tạo Hồ sơ kết nối.
-     * 6. Sau khi tạo thành công -> mở số điện thoại.
+     * - Họ và tên
+     * - Số điện thoại
+     * - Quê quán
+     *
+     * Đồng thời truyền ID của:
+     *
+     * - Tin tuyển dụng
+     * - Nhà cung ứng
+     *
+     * để sau này Backend có thể tạo đúng
+     * Hồ sơ kết nối.
      */
+
+    window.location.hash =
+      `#/register?tin_tuyen_dung_id=${tinTuyenDungId}` +
+      `&nha_cung_ung_id=${nhaCungUngId}`;
   };
 
   return (
     <MainLayout>
       <div className="job-detail">
 
-        <h1>Chi tiết việc làm</h1>
+        <h1 className="job-detail-title">
+          Chi tiết việc làm
+        </h1>
 
         <Card>
 
-          <h2>Công nhân điện tử</h2>
+          <h2>
+            Công nhân điện tử
+          </h2>
 
           <Badge
             text="Đang tuyển"
@@ -92,8 +116,8 @@ function JobDetail() {
                 color: "#666",
               }}
             >
-              Bạn cần đăng ký 3 thông tin cơ bản
-              để tạo Hồ sơ kết nối và xem số điện thoại
+              Đăng ký 3 thông tin cơ bản để tạo
+              Hồ sơ kết nối và xem số điện thoại
               Nhà cung ứng.
             </p>
 
