@@ -13,28 +13,47 @@ function SearchJobs() {
     event.preventDefault();
 
     /*
-     * Chưa gọi API ở giai đoạn này.
+     * Tìm kiếm tin tuyển dụng là chức năng công khai.
      *
-     * Backend sau này sẽ tìm kiếm Tin tuyển dụng
-     * từ dữ liệu 03_TinTuyenDung.sql.
+     * Người lao động:
+     * - Không cần đăng nhập.
+     * - Không cần đăng ký.
+     * - Không tạo Hồ sơ kết nối khi tìm kiếm.
      *
-     * Tìm kiếm chỉ phục vụ việc tìm công việc.
-     * Không tạo Hồ sơ kết nối.
+     * Backend sau này sẽ tìm trong:
+     * 03_TinTuyenDung
      */
+  };
+
+  const handleViewJob = (jobId) => {
+    /*
+     * Xem chi tiết tin tuyển dụng.
+     *
+     * Chưa tạo Hồ sơ kết nối.
+     */
+    window.location.hash = "#/job-detail";
   };
 
   return (
     <MainLayout>
       <div className="search-jobs">
 
-        <h1>Tìm kiếm việc làm</h1>
+        <h1>
+          Tìm kiếm việc làm
+        </h1>
+
+        <p>
+          Tìm công việc phù hợp mà không cần đăng nhập.
+        </p>
 
         <form onSubmit={handleSearch}>
 
           <Input
             placeholder="Nhập tên công việc hoặc ngành nghề..."
             value={keyword}
-            onChange={(event) => setKeyword(event.target.value)}
+            onChange={(event) =>
+              setKeyword(event.target.value)
+            }
           />
 
           <div className="space"></div>
@@ -50,7 +69,9 @@ function SearchJobs() {
 
         <Card>
 
-          <h3>Công nhân điện tử</h3>
+          <h2>
+            Công nhân điện tử
+          </h2>
 
           <Badge
             text="Đang tuyển"
@@ -74,6 +95,7 @@ function SearchJobs() {
 
           <Button
             text="XEM CHI TIẾT"
+            onClick={() => handleViewJob(1)}
           />
 
         </Card>
