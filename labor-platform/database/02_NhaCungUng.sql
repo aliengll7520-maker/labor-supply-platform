@@ -1,23 +1,49 @@
 /*
 ==========================================================
 02_NhaCungUng.sql
-Quản lý Nhà cung ứng
+QUẢN LÝ NHÀ CUNG ỨNG
 Labor Supply Platform
-Version: 2.0
+Version: 3.0
 ==========================================================
 
-Nhà cung ứng là trung tâm hoạt động tuyển dụng.
+NGUYÊN TẮC:
 
-Quản trị theo dõi:
-- Hiệu quả tuyển dụng
-- Điểm minh bạch
-- Chất lượng xử lý hồ sơ
-- Lịch sử hoạt động
+Nhà cung ứng là nguồn cung việc làm của nền tảng.
+
+Nhà cung ứng phải:
+
+- Có hồ sơ quản lý.
+- Có thông tin liên hệ.
+- Được xác minh.
+- Có trạng thái hoạt động.
+- Có lịch sử tuyển dụng.
+- Có dữ liệu kết nối với Người lao động.
+- Có điểm minh bạch.
+
+ĐẶC BIỆT:
+
+Số điện thoại Nhà cung ứng KHÔNG phải dữ liệu công khai.
+
+Số điện thoại được lưu trong hệ thống để:
+
+1. Quản trị kiểm soát.
+2. Nhà cung ứng sử dụng để liên hệ.
+3. Chỉ cấp quyền xem cho Người lao động
+   sau khi Hồ sơ kết nối được tạo và xác nhận.
+
+KHÔNG hiển thị trực tiếp số điện thoại trong
+tin tuyển dụng công khai.
 
 ==========================================================
 */
 
 CREATE TABLE nha_cung_ung (
+
+    /*
+     * ==================================================
+     * NHẬN DIỆN
+     * ==================================================
+     */
 
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 
@@ -30,55 +56,128 @@ CREATE TABLE nha_cung_ung (
     nguoi_dai_dien VARCHAR(255) NOT NULL
         COMMENT 'Người đại diện',
 
-    so_dien_thoai VARCHAR(20) NOT NULL
-        COMMENT 'Số điện thoại (mặc định ẩn)',
+    /*
+     * ==================================================
+     * THÔNG TIN LIÊN HỆ
+     * ==================================================
+     *
+     * Số điện thoại được lưu nhưng không công khai.
+     */
 
-    email VARCHAR(255) DEFAULT NULL,
+    so_dien_thoai VARCHAR(20) NOT NULL
+        COMMENT 'Số điện thoại Nhà cung ứng - dữ liệu riêng tư',
+
+    so_dien_thoai_da_xac_minh TINYINT(1) NOT NULL DEFAULT 0
+        COMMENT '0 = chưa xác minh, 1 = đã xác minh',
+
+    email VARCHAR(255) DEFAULT NULL
+        COMMENT 'Email Nhà cung ứng',
+
+    dia_chi TEXT DEFAULT NULL
+        COMMENT 'Địa chỉ Nhà cung ứng',
+
+    google_maps TEXT DEFAULT NULL
+        COMMENT 'Vị trí Google Maps',
+
+    /*
+     * ==================================================
+     * THÔNG TIN CÔNG KHAI
+     * ==================================================
+     */
 
     logo VARCHAR(255) DEFAULT NULL,
 
-    dia_chi TEXT DEFAULT NULL,
+    gioi_thieu TEXT DEFAULT NULL
+        COMMENT 'Thông tin giới thiệu công khai',
 
-    google_maps TEXT DEFAULT NULL,
+    /*
+     * ==================================================
+     * HỒ SƠ PHÁP LÝ / XÁC MINH
+     * ==================================================
+     */
 
-    gioi_thieu TEXT DEFAULT NULL,
-
-    giay_phep VARCHAR(255) DEFAULT NULL,
-
-    diem_minh_bach DECIMAL(5,2) DEFAULT 100.00
-        COMMENT 'Điểm minh bạch',
-
-    tong_tin_tuyen_dung INT DEFAULT 0,
-
-    tong_ho_so_ket_noi INT DEFAULT 0,
-
-    tong_lien_he INT DEFAULT 0,
-
-    tong_hen INT DEFAULT 0,
-
-    tong_nhan_viec INT DEFAULT 0,
-
-    tong_khong_phu_hop INT DEFAULT 0,
-
-    tong_huy INT DEFAULT 0,
-
-    tong_phan_anh INT DEFAULT 0,
-
-    ti_le_phan_hoi DECIMAL(5,2) DEFAULT 0,
-
-    ti_le_nhan_viec DECIMAL(5,2) DEFAULT 0,
-
-    thoi_gian_phan_hoi_trung_binh INT DEFAULT 0
-        COMMENT 'Phút',
+    giay_phep VARCHAR(255) DEFAULT NULL
+        COMMENT 'Thông tin giấy phép hoặc tài liệu xác minh',
 
     xac_minh ENUM(
 
         'chua_xac_minh',
 
-        'da_xac_minh'
+        'dang_xac_minh',
 
-    ) DEFAULT 'chua_xac_minh'
-        COMMENT 'Trạng thái xác minh',
+        'da_xac_minh',
+
+        'can_xac_minh_lai'
+
+    ) NOT NULL DEFAULT 'chua_xac_minh'
+        COMMENT 'Trạng thái xác minh Nhà cung ứng',
+
+    ngay_xac_minh DATETIME NULL
+        COMMENT 'Thời điểm xác minh',
+
+    /*
+     * ==================================================
+     * MINH BẠCH
+     * ==================================================
+     */
+
+    diem_minh_bach DECIMAL(5,2) NOT NULL DEFAULT 100.00
+        COMMENT 'Điểm minh bạch',
+
+    /*
+     * ==================================================
+     * CHỈ SỐ HOẠT ĐỘNG
+     * ==================================================
+     *
+     * Các số liệu này phục vụ Dashboard quản trị.
+     *
+     * Có thể được cập nhật từ dữ liệu thực tế sau này.
+     */
+
+    tong_tin_tuyen_dung INT UNSIGNED NOT NULL DEFAULT 0
+        COMMENT 'Tổng số tin tuyển dụng',
+
+    tong_ho_so_ket_noi INT UNSIGNED NOT NULL DEFAULT 0
+        COMMENT 'Tổng số Hồ sơ kết nối',
+
+    tong_lien_he INT UNSIGNED NOT NULL DEFAULT 0
+        COMMENT 'Tổng số lần liên hệ',
+
+    tong_hen INT UNSIGNED NOT NULL DEFAULT 0
+        COMMENT 'Tổng số lịch hẹn',
+
+    tong_nhan_viec INT UNSIGNED NOT NULL DEFAULT 0
+        COMMENT 'Tổng số Người lao động nhận việc',
+
+    tong_khong_phu_hop INT UNSIGNED NOT NULL DEFAULT 0
+        COMMENT 'Tổng số kết nối không phù hợp',
+
+    tong_huy INT UNSIGNED NOT NULL DEFAULT 0
+        COMMENT 'Tổng số kết nối bị hủy',
+
+    tong_phan_anh INT UNSIGNED NOT NULL DEFAULT 0
+        COMMENT 'Tổng số phản ánh',
+
+    /*
+     * ==================================================
+     * CHỈ SỐ PHẢN HỒI
+     * ==================================================
+     */
+
+    ti_le_phan_hoi DECIMAL(5,2) NOT NULL DEFAULT 0
+        COMMENT 'Tỷ lệ phản hồi',
+
+    ti_le_nhan_viec DECIMAL(5,2) NOT NULL DEFAULT 0
+        COMMENT 'Tỷ lệ nhận việc',
+
+    thoi_gian_phan_hoi_trung_binh INT UNSIGNED NOT NULL DEFAULT 0
+        COMMENT 'Thời gian phản hồi trung bình - phút',
+
+    /*
+     * ==================================================
+     * TRẠNG THÁI NHÀ CUNG ỨNG
+     * ==================================================
+     */
 
     trang_thai ENUM(
 
@@ -86,19 +185,51 @@ CREATE TABLE nha_cung_ung (
 
         'hoat_dong',
 
-        'tam_khoa'
+        'tam_khoa',
 
-    ) DEFAULT 'cho_duyet',
+        'ngung_hoat_dong'
 
-    ngay_tao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    ) NOT NULL DEFAULT 'cho_duyet'
+        COMMENT 'Trạng thái hoạt động',
 
-    ngay_cap_nhat TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    /*
+     * ==================================================
+     * QUẢN TRỊ
+     * ==================================================
+     */
+
+    ghi_chu_quan_tri TEXT NULL
+        COMMENT 'Ghi chú nội bộ của quản trị',
+
+    ngay_tao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    ngay_cap_nhat TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP,
 
-    INDEX idx_trang_thai (trang_thai),
+    /*
+     * ==================================================
+     * INDEX
+     * ==================================================
+     */
 
-    INDEX idx_xac_minh (xac_minh),
+    INDEX idx_trang_thai (
+        trang_thai
+    ),
 
-    INDEX idx_diem_minh_bach (diem_minh_bach)
+    INDEX idx_xac_minh (
+        xac_minh
+    ),
+
+    INDEX idx_diem_minh_bach (
+        diem_minh_bach
+    ),
+
+    INDEX idx_so_dien_thoai (
+        so_dien_thoai
+    ),
+
+    INDEX idx_so_dien_thoai_xac_minh (
+        so_dien_thoai_da_xac_minh
+    )
 
 );
