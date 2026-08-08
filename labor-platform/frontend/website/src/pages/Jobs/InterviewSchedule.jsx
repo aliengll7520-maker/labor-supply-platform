@@ -1,4 +1,4 @@
- import React from "react";
+  import React from "react";
 import MainLayout from "../../layouts/MainLayout/MainLayout";
 import Card from "../../components/Card/Card";
 import Badge from "../../components/Badge/Badge";
@@ -6,29 +6,28 @@ import Button from "../../components/Button/Button";
 import "./InterviewSchedule.css";
 
 function InterviewSchedule() {
+  const handleViewConnection = () => {
+    window.location.hash = "#/connections";
+  };
+
   return (
     <MainLayout>
       <div className="interview-schedule">
 
         <h1 className="interview-title">
-          Lịch hẹn trong Hồ sơ kết nối
+          Lịch hẹn kết nối
         </h1>
 
         <Card>
 
-          <h2>Công nhân điện tử</h2>
+          <h2>
+            Công nhân điện tử
+          </h2>
 
           <p>
             <strong>Nhà cung ứng:</strong>{" "}
             Nhà cung ứng A
           </p>
-
-          <div style={{ marginBottom: "16px" }}>
-            <Badge
-              text="Đã hẹn"
-              color="#1976d2"
-            />
-          </div>
 
           <p>
             <strong>Ngày hẹn:</strong>{" "}
@@ -46,9 +45,13 @@ function InterviewSchedule() {
           </p>
 
           <p>
-            <strong>Trạng thái Hồ sơ kết nối:</strong>{" "}
-            Đã hẹn
+            <strong>Trạng thái Hồ sơ kết nối:</strong>
           </p>
+
+          <Badge
+            text="Đã hẹn"
+            color="#1976d2"
+          />
 
           <div
             style={{
@@ -59,18 +62,21 @@ function InterviewSchedule() {
             }}
           >
             <p>
-              Lịch hẹn này là một bước trong quá trình
-              xử lý Hồ sơ kết nối.
+              Lịch hẹn này là một bước trong
+              Quá trình kết nối.
             </p>
 
             <p>
-              Mọi thay đổi trạng thái sẽ được ghi nhận
-              vào Quá trình kết nối.
+              Khi trạng thái thay đổi, hệ thống
+              sẽ ghi nhận vào Hồ sơ kết nối.
             </p>
           </div>
 
           <div style={{ marginTop: "20px" }}>
-            <Button text="XÁC NHẬN LỊCH HẸN" />
+            <Button
+              text="XEM HỒ SƠ KẾT NỐI"
+              onClick={handleViewConnection}
+            />
           </div>
 
         </Card>
