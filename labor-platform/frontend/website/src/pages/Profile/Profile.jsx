@@ -10,20 +10,24 @@ function Profile() {
       <div className="profile">
 
         <h1 className="profile-title">
-          Hồ sơ cá nhân
+          Thông tin của tôi
         </h1>
 
         <Card>
 
-          <p><strong>Họ tên:</strong> Nguyễn Văn A</p>
+          <p>
+            <strong>Họ và tên:</strong> Nguyễn Văn A
+          </p>
 
-          <p><strong>Số điện thoại:</strong> 0900000000</p>
+          <p>
+            <strong>Số điện thoại:</strong> 0900000000
+          </p>
 
-          <p><strong>Địa chỉ:</strong> Hà Nội</p>
+          <p>
+            <strong>Quê quán:</strong> Hà Nội
+          </p>
 
-          <p><strong>Trạng thái:</strong> Sẵn sàng làm việc</p>
-
-          <Button text="Cập nhật hồ sơ" />
+          <Button text="Cập nhật thông tin" />
 
         </Card>
 
