@@ -6,6 +6,25 @@ import Button from "../../components/Button/Button";
 import "./ApplicationResult.css";
 
 function ApplicationResult() {
+  /*
+   * Đây là màn hình kết quả sau khi Hồ sơ kết nối
+   * được tạo thành công.
+   *
+   * Lưu ý:
+   * Không gọi đây là "kết quả ứng tuyển".
+   *
+   * Đây là:
+   * Hồ sơ kết nối đã được ghi nhận.
+   */
+
+  const handleBackToJobs = () => {
+    window.location.hash = "#/jobs";
+  };
+
+  const handleViewConnection = () => {
+    window.location.hash = "#/connections";
+  };
+
   return (
     <MainLayout>
       <div className="application-result">
@@ -17,11 +36,16 @@ function ApplicationResult() {
         <Card>
 
           <div className="application-result-success">
-            <h2>Hồ sơ kết nối đã được tạo</h2>
+
+            <h2>
+              Hồ sơ kết nối đã được ghi nhận
+            </h2>
 
             <p>
-              Thông tin của bạn đã được ghi nhận trên hệ thống.
+              Thông tin của bạn đã được hệ thống
+              ghi nhận để kết nối với Nhà cung ứng.
             </p>
+
           </div>
 
           <div className="application-result-info">
@@ -37,16 +61,11 @@ function ApplicationResult() {
             </p>
 
             <p>
-              <strong>Ngày tạo:</strong>{" "}
-              07/08/2026
-            </p>
-
-            <p>
               <strong>Trạng thái:</strong>
             </p>
 
             <Badge
-              text="Mới tạo"
+              text="Đã tạo Hồ sơ kết nối"
               color="#2e7d32"
             />
 
@@ -60,11 +79,28 @@ function ApplicationResult() {
               borderRadius: "8px",
             }}
           >
+
             <p>
-              Hồ sơ kết nối của bạn đã được tạo.
-              Nhà cung ứng có thể tiếp nhận và cập nhật
-              quá trình xử lý hồ sơ.
+              <strong>
+                Số điện thoại Nhà cung ứng
+              </strong>
             </p>
+
+            <p>
+              Số điện thoại chỉ được mở sau khi
+              Hồ sơ kết nối được hệ thống ghi nhận.
+            </p>
+
+            <p
+              style={{
+                fontSize: "14px",
+                color: "#666",
+              }}
+            >
+              Quá trình kết nối sẽ tiếp tục được
+              ghi nhận trong hồ sơ của bạn.
+            </p>
+
           </div>
 
           <div
@@ -72,7 +108,19 @@ function ApplicationResult() {
               marginTop: "20px",
             }}
           >
-            <Button text="XEM HỒ SƠ KẾT NỐI" />
+
+            <Button
+              text="XEM HỒ SƠ KẾT NỐI"
+              onClick={handleViewConnection}
+            />
+
+            <div className="space"></div>
+
+            <Button
+              text="TIẾP TỤC XEM VIỆC"
+              onClick={handleBackToJobs}
+            />
+
           </div>
 
         </Card>
@@ -82,4 +130,4 @@ function ApplicationResult() {
   );
 }
 
-export default ApplicationResult; 
+export default ApplicationResult;
