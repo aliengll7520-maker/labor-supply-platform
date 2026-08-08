@@ -1,4 +1,3 @@
-
 import React from "react";
 import MainLayout from "../../layouts/MainLayout/MainLayout";
 import Card from "../../components/Card/Card";
@@ -12,27 +11,36 @@ function AppliedJobs() {
       <div className="applied-jobs">
 
         <h1 className="applied-jobs-title">
-          Việc làm đã ứng tuyển
+          Hồ sơ kết nối của tôi
         </h1>
 
         <Card>
 
           <h2>Công nhân điện tử</h2>
 
-          <Badge
-            text="Đã ứng tuyển"
-            color="#2e7d32"
-          />
+          <p>
+            <strong>Nhà cung ứng:</strong> Nhà cung ứng A
+          </p>
 
-          <p><strong>Nhà cung ứng:</strong> Nhà cung ứng A</p>
+          <p>
+            <strong>Ngày tạo hồ sơ:</strong> 07/08/2026
+          </p>
 
-          <p><strong>Ngày ứng tuyển:</strong> 07/08/2026</p>
+          <div style={{ marginBottom: "16px" }}>
+            <Badge
+              text="Mới tạo"
+              color="#2e7d32"
+            />
+          </div>
 
-          <p><strong>Trạng thái:</strong> Đang chờ xử lý</p>
+          <p>
+            Hồ sơ kết nối được tạo khi bạn đăng ký
+            thông tin để xem số điện thoại Nhà cung ứng.
+          </p>
 
           <div className="applied-jobs-actions">
 
-            <Button text="XEM CHI TIẾT" />
+            <Button text="XEM HỒ SƠ KẾT NỐI" />
 
           </div>
 
