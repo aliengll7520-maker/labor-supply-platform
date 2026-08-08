@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import MainLayout from "../../layouts/MainLayout/MainLayout";
 import Card from "../../components/Card/Card";
 import Badge from "../../components/Badge/Badge";
@@ -11,29 +11,67 @@ function InterviewSchedule() {
       <div className="interview-schedule">
 
         <h1 className="interview-title">
-          Lịch phỏng vấn
+          Lịch hẹn trong Hồ sơ kết nối
         </h1>
 
         <Card>
 
           <h2>Công nhân điện tử</h2>
 
-          <Badge
-            text="Đã lên lịch"
-            color="#1976d2"
-          />
+          <p>
+            <strong>Nhà cung ứng:</strong>{" "}
+            Nhà cung ứng A
+          </p>
 
-          <p><strong>Nhà cung ứng:</strong> Nhà cung ứng A</p>
+          <div style={{ marginBottom: "16px" }}>
+            <Badge
+              text="Đã hẹn"
+              color="#1976d2"
+            />
+          </div>
 
-          <p><strong>Ngày phỏng vấn:</strong> 15/08/2026</p>
+          <p>
+            <strong>Ngày hẹn:</strong>{" "}
+            15/08/2026
+          </p>
 
-          <p><strong>Giờ phỏng vấn:</strong> 08:30</p>
+          <p>
+            <strong>Giờ hẹn:</strong>{" "}
+            08:30
+          </p>
 
-          <p><strong>Địa điểm:</strong> Văn phòng Nhà cung ứng A</p>
+          <p>
+            <strong>Địa điểm:</strong>{" "}
+            Văn phòng Nhà cung ứng A
+          </p>
 
-          <p><strong>Trạng thái:</strong> Chờ xác nhận</p>
+          <p>
+            <strong>Trạng thái Hồ sơ kết nối:</strong>{" "}
+            Đã hẹn
+          </p>
 
-          <Button text="XÁC NHẬN THAM GIA" />
+          <div
+            style={{
+              marginTop: "20px",
+              padding: "16px",
+              border: "1px solid #ddd",
+              borderRadius: "8px",
+            }}
+          >
+            <p>
+              Lịch hẹn này là một bước trong quá trình
+              xử lý Hồ sơ kết nối.
+            </p>
+
+            <p>
+              Mọi thay đổi trạng thái sẽ được ghi nhận
+              vào Quá trình kết nối.
+            </p>
+          </div>
+
+          <div style={{ marginTop: "20px" }}>
+            <Button text="XÁC NHẬN LỊCH HẸN" />
+          </div>
 
         </Card>
 
