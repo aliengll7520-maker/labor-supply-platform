@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+ import React, { useEffect, useState } from "react";
 import Card from "../components/Card/Card";
 import Input from "../components/Input/Input";
 import Button from "../components/Button/Button";
@@ -13,32 +13,16 @@ function Register() {
   const [nhaCungUngId, setNhaCungUngId] = useState("");
 
   useEffect(() => {
-    /*
-     * Lấy thông tin kết nối từ URL.
-     *
-     * Ví dụ:
-     *
-     * #/register?tin_tuyen_dung_id=1&nha_cung_ung_id=1
-     *
-     * Hai ID này KHÔNG phải dữ liệu cá nhân của
-     * Người lao động.
-     *
-     * Chúng dùng để xác định:
-     *
-     * Người lao động đang muốn kết nối với
-     * Tin tuyển dụng nào và Nhà cung ứng nào.
-     */
-
     const hash = window.location.hash;
-
     const queryIndex = hash.indexOf("?");
 
     if (queryIndex === -1) {
       return;
     }
 
-    const queryString = hash.substring(queryIndex + 1);
-    const params = new URLSearchParams(queryString);
+    const params = new URLSearchParams(
+      hash.substring(queryIndex + 1)
+    );
 
     setTinTuyenDungId(
       params.get("tin_tuyen_dung_id") || ""
@@ -52,15 +36,6 @@ function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    /*
-     * Chỉ chấp nhận đúng 3 trường dữ liệu
-     * của Người lao động:
-     *
-     * 1. Họ và tên
-     * 2. Số điện thoại
-     * 3. Quê quán
-     */
-
     if (
       !hoTen.trim() ||
       !soDienThoai.trim() ||
@@ -69,42 +44,33 @@ function Register() {
       return;
     }
 
-    /*
-     * Kiểm tra ngữ cảnh kết nối.
-     *
-     * Không cho tạo Hồ sơ kết nối nếu không biết
-     * Người lao động đang kết nối với tin nào.
-     */
-
     if (!tinTuyenDungId || !nhaCungUngId) {
       return;
     }
 
     /*
-     * Backend sau này sẽ:
+     * Sau khi Backend được xây:
      *
-     * 1. Tạo hoặc xác định Người lao động.
-     * 2. Tạo 00_HoSoKetNoi.
-     * 3. Gắn:
+     * 1. Tạo Người lao động.
+     * 2. Tạo Hồ sơ phỏng vấn.
+     * 3. Ghi 04_QuaTrinhPhongVan:
+     *      dang_ky_ho_so_phong_van
+     *      mo_so_dien_thoai
+     * 4. Ghi nhật ký hệ thống.
+     * 5. Trả về số điện thoại Nhà cung ứng.
      *
-     *    nguoi_lao_dong_id
-     *    nha_cung_ung_id
-     *    tin_tuyen_dung_id
-     *
-     * 4. Ghi nhận 04_QuaTrinhKetNoi.
-     * 5. Ghi nhật ký hệ thống.
-     * 6. Cho phép mở số điện thoại Nhà cung ứng.
-     *
-     * Hiện tại chưa gọi API vì Backend chưa xây.
+     * Hiện tại chuyển sang màn hình kết quả
+     * để khóa đúng luồng giao diện.
      */
 
-    console.log({
-      hoTen,
-      soDienThoai,
-      queQuan,
-      tinTuyenDungId,
-      nhaCungUngId,
-    });
+    window.location.hash =
+      `#/interview-profile-result?` +
+      `tin_tuyen_dung_id=${encodeURIComponent(
+        tinTuyenDungId
+      )}` +
+      `&nha_cung_ung_id=${encodeURIComponent(
+        nhaCungUngId
+      )}`;
   };
 
   const handleBackToJobs = () => {
@@ -119,12 +85,12 @@ function Register() {
         <div className="register-header">
 
           <h1>
-            Đăng ký để xem số điện thoại
+            Đăng ký Hồ sơ phỏng vấn
           </h1>
 
           <p>
-            Nhập 3 thông tin cơ bản để tạo
-            Hồ sơ kết nối với Nhà cung ứng.
+            Vui lòng cung cấp 3 thông tin cơ bản
+            để đăng ký Hồ sơ phỏng vấn cho vị trí này.
           </p>
 
         </div>
@@ -163,21 +129,19 @@ function Register() {
           <div className="space"></div>
 
           <Button
-            text="TẠO HỒ SƠ KẾT NỐI"
+            text="ĐĂNG KÝ HỒ SƠ PHỎNG VẤN"
             type="submit"
           />
 
         </form>
 
-        <div
-          style={{
-            marginTop: "20px",
-          }}
-        >
+        <div style={{ marginTop: "20px" }}>
+
           <Button
             text="QUAY LẠI XEM TIN"
             onClick={handleBackToJobs}
           />
+
         </div>
 
       </Card>
