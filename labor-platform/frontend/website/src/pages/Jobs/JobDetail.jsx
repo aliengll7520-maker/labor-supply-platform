@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainLayout from "../../layouts/MainLayout/MainLayout";
 import Card from "../../components/Card/Card";
 import Badge from "../../components/Badge/Badge";
@@ -6,39 +6,78 @@ import Button from "../../components/Button/Button";
 import "./JobDetail.css";
 
 function JobDetail() {
-  /*
-   * ID tạm thời của tin tuyển dụng và Nhà cung ứng.
-   *
-   * Khi Backend hoạt động, hai giá trị này sẽ được
-   * lấy trực tiếp từ dữ liệu Tin tuyển dụng.
-   */
-  const tinTuyenDungId = 1;
-  const nhaCungUngId = 1;
+  const [tinTuyenDungId, setTinTuyenDungId] = useState("");
+  const [nhaCungUngId, setNhaCungUngId] = useState("");
+
+  useEffect(() => {
+    /*
+     * Đọc ID từ URL.
+     *
+     * Ví dụ:
+     *
+     * #/job-detail?tin_tuyen_dung_id=2
+     *
+     * Khi Backend hoạt động, nha_cung_ung_id sẽ được
+     * lấy từ chính dữ liệu Tin tuyển dụng.
+     */
+
+    const hash = window.location.hash;
+    const queryIndex = hash.indexOf("?");
+
+    if (queryIndex === -1) {
+      return;
+    }
+
+    const queryString = hash.substring(queryIndex + 1);
+    const params = new URLSearchParams(queryString);
+
+    setTinTuyenDungId(
+      params.get("tin_tuyen_dung_id") || ""
+    );
+
+    /*
+     * Hiện tại dữ liệu mẫu chưa lấy từ Backend.
+     *
+     * Khi Backend hoạt động:
+     *
+     * tin_tuyen_dung_id
+     *        ↓
+     * 03_TinTuyenDung
+     *        ↓
+     * nha_cung_ung_id
+     *
+     * Không được cho người dùng tự nhập ID Nhà cung ứng.
+     */
+
+    setNhaCungUngId(
+      params.get("nha_cung_ung_id") || "1"
+    );
+  }, []);
 
   const handleViewSupplierPhone = () => {
     /*
-     * Người lao động KHÔNG cần đăng nhập để thực hiện
-     * hành động này.
-     *
-     * Hệ thống đưa người lao động tới màn hình đăng ký
-     * 3 trường:
-     *
-     * - Họ và tên
-     * - Số điện thoại
-     * - Quê quán
-     *
-     * Đồng thời truyền ID của:
-     *
-     * - Tin tuyển dụng
-     * - Nhà cung ứng
-     *
-     * để sau này Backend có thể tạo đúng
+     * Không có Tin tuyển dụng ID thì không tạo
      * Hồ sơ kết nối.
      */
 
+    if (!tinTuyenDungId || !nhaCungUngId) {
+      return;
+    }
+
+    /*
+     * Người lao động không cần đăng nhập.
+     *
+     * Chỉ khi yêu cầu xem số điện thoại Nhà cung ứng
+     * mới đi tới bước đăng ký 3 trường.
+     */
+
     window.location.hash =
-      `#/register?tin_tuyen_dung_id=${tinTuyenDungId}` +
-      `&nha_cung_ung_id=${nhaCungUngId}`;
+      `#/register?tin_tuyen_dung_id=${encodeURIComponent(
+        tinTuyenDungId
+      )}` +
+      `&nha_cung_ung_id=${encodeURIComponent(
+        nhaCungUngId
+      )}`;
   };
 
   return (
