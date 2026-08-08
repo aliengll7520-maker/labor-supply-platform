@@ -9,39 +9,69 @@ function FilterJobs() {
   const [province, setProvince] = useState("");
 
   const provinceOptions = [
-    { value: "", label: "Tất cả tỉnh thành" },
-    { value: "bacninh", label: "Bắc Ninh" },
-    { value: "haiphong", label: "Hải Phòng" },
+    {
+      value: "",
+      label: "Tất cả tỉnh thành",
+    },
+    {
+      value: "bacninh",
+      label: "Bắc Ninh",
+    },
+    {
+      value: "haiphong",
+      label: "Hải Phòng",
+    },
   ];
 
   const handleFilter = (event) => {
     event.preventDefault();
 
     /*
-     * Chưa gọi API ở giai đoạn này.
+     * Bộ lọc chỉ tác động đến Tin tuyển dụng.
+     *
+     * Người lao động:
+     * - Không cần đăng nhập.
+     * - Không cần đăng ký.
+     * - Không tạo Hồ sơ kết nối khi lọc tin.
      *
      * Backend sau này sẽ lọc dữ liệu từ:
-     * 03_TinTuyenDung.sql
-     *
-     * Bộ lọc chỉ tác động đến danh sách tin tuyển dụng.
-     * Không tạo Hồ sơ kết nối.
-     * Không thu thập thêm dữ liệu Người lao động.
+     * 03_TinTuyenDung
      */
+  };
+
+  const handleViewJob = () => {
+    /*
+     * Xem chi tiết tin.
+     *
+     * Hồ sơ kết nối chỉ được tạo khi người lao động
+     * yêu cầu xem số điện thoại Nhà cung ứng.
+     */
+    window.location.hash = "#/job-detail";
   };
 
   return (
     <MainLayout>
       <div className="filter-jobs">
 
-        <h1>Bộ lọc việc làm</h1>
+        <h1>
+          Lọc việc làm
+        </h1>
+
+        <p>
+          Lọc các tin tuyển dụng công khai
+          theo nhu cầu của bạn.
+        </p>
 
         <Card>
+
           <form onSubmit={handleFilter}>
 
             <Select
               options={provinceOptions}
               value={province}
-              onChange={(event) => setProvince(event.target.value)}
+              onChange={(event) =>
+                setProvince(event.target.value)
+              }
             />
 
             <div className="space"></div>
@@ -52,6 +82,37 @@ function FilterJobs() {
             />
 
           </form>
+
+        </Card>
+
+        <div className="space"></div>
+
+        <Card>
+
+          <h2>
+            Công nhân điện tử
+          </h2>
+
+          <p>
+            <strong>Nhà cung ứng:</strong>{" "}
+            Nhà cung ứng A
+          </p>
+
+          <p>
+            <strong>Địa điểm:</strong>{" "}
+            Bắc Ninh
+          </p>
+
+          <p>
+            <strong>Mức lương:</strong>{" "}
+            12.000.000 VNĐ
+          </p>
+
+          <Button
+            text="XEM CHI TIẾT"
+            onClick={handleViewJob}
+          />
+
         </Card>
 
       </div>
