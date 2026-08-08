@@ -8,17 +8,17 @@ import "./Jobs.css";
 function Jobs() {
   const handleViewJob = (jobId) => {
     /*
-     * Chưa gọi API ở giai đoạn này.
+     * Chuyển người lao động tới đúng tin tuyển dụng.
      *
-     * Backend sau này sẽ lấy tin từ:
-     * 03_TinTuyenDung.sql
-     *
-     * Việc xem tin KHÔNG tạo Hồ sơ kết nối.
+     * Không yêu cầu đăng nhập.
+     * Không tạo Hồ sơ kết nối.
      *
      * Hồ sơ kết nối chỉ được tạo khi người lao động
      * yêu cầu xem số điện thoại Nhà cung ứng.
      */
-    console.log("Xem tin tuyển dụng:", jobId);
+
+    window.location.hash =
+      `#/job-detail?tin_tuyen_dung_id=${jobId}`;
   };
 
   return (
@@ -29,9 +29,16 @@ function Jobs() {
           Việc làm
         </h1>
 
+        <p>
+          Xem các tin tuyển dụng công khai
+          từ Nhà cung ứng.
+        </p>
+
         <Card>
 
-          <h2>Công nhân điện tử</h2>
+          <h2>
+            Công nhân điện tử
+          </h2>
 
           <Badge
             text="Đang tuyển"
@@ -53,6 +60,11 @@ function Jobs() {
             Bắc Ninh
           </p>
 
+          <p>
+            <strong>Số lượng:</strong>{" "}
+            100 người
+          </p>
+
           <Button
             text="XEM CHI TIẾT"
             onClick={() => handleViewJob(1)}
@@ -62,7 +74,9 @@ function Jobs() {
 
         <Card>
 
-          <h2>Công nhân may</h2>
+          <h2>
+            Công nhân may
+          </h2>
 
           <Badge
             text="Đang tuyển"
@@ -82,6 +96,11 @@ function Jobs() {
           <p>
             <strong>Địa điểm:</strong>{" "}
             Hải Phòng
+          </p>
+
+          <p>
+            <strong>Số lượng:</strong>{" "}
+            50 người
           </p>
 
           <Button
